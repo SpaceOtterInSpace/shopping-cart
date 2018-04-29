@@ -12,7 +12,7 @@ class App extends Component {
         <header className="App-header">
           <CartHeader />
           <CartItems />
-          <CartFooter />
+          <CartFooter copyright="2018" />
         </header>
       </div>
     );
