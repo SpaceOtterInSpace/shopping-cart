@@ -8,7 +8,29 @@ class AddItem extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    console.log(e.target);
+    const { id, name, priceInCents, quantity } = this.state;
+    const newProduct = {
+      product: {
+        id,
+        name,
+        priceInCents
+      },
+      quantity
+    };
+    this.props.addItem(newProduct);
+  };
+
+  handleChange = e => {
+    const id = e.target.value;
+    const { products } = this.props;
+    const product = products.filter(element => {
+      return +id === +element.id;
+    });
+
+    this.setState({
+      name: product[0].name,
+      priceInCents: product[0].priceInCents
+    });
   };
 
   render() {
@@ -18,12 +40,19 @@ class AddItem extends Component {
           <div className="list-group">
             <div className="row">
               <label>Quantity</label>
-              <input className="col-md-12" />
+              <input
+                className="col-md-12"
+                onChange={e => this.setState({ quantity: e.target.value })}
+              />
             </div>
             <div className="row">
               <label>Products</label>
-              <select className="col-md-12 custom-select" defaultValue={0}>
-                <option value={0}>Select an Option...</option>
+              <select
+                className="col-md-12 custom-select"
+                defaultValue={0}
+                onChange={this.handleChange}
+              >
+                <option value={this.state.value}>Select an Option...</option>
                 {this.state.products.map(product => (
                   <option key={product.id} value={product.id}>
                     {product.name}
