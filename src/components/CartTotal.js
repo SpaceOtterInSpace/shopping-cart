@@ -8,8 +8,10 @@ class CartTotal extends Component {
 
   total = () => {
     const { cartItemsList } = this.props;
-    return cartItemsList.reduce((sum, i) => {
-      return sum + i.quantity * i.product.priceInCents;
+    return cartItemsList.reduce((sum, item) => {
+      return (
+        sum + item.quantity * this.props.getProductFromItem(item).priceInCents
+      );
     }, 0);
   };
 

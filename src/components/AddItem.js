@@ -53,7 +53,7 @@ class AddItem extends Component {
                 onChange={this.handleChange}
               >
                 <option value={this.state.value}>Select an Option...</option>
-                {this.state.products.map(product => (
+                {this.props.products.map(product => (
                   <option key={product.id} value={product.id}>
                     {product.name}
                   </option>
